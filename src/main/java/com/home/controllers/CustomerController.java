@@ -36,7 +36,12 @@ public class CustomerController {
 	@RequestMapping("/showForm")
 	public String showForm(Model model) {
 
-		model.addAttribute("customer", new Customer());
+		Customer customer = new Customer();
+		
+		model.addAttribute("customer", customer);
+		
+		System.out.println(customer);
+		System.out.println(customer.getFirstName());
 
 		return "customer-form";
 	}
@@ -54,11 +59,16 @@ public class CustomerController {
 	@RequestMapping("/processForm")
 	public String processForm(@Valid @ModelAttribute("customer") Customer customer, BindingResult result) {
 
-		
-		System.out.println(customer.getLastName());
+		System.out.println("Process form " + customer);
+		System.out.println("Process form " + customer.getLastName());
 		
 		System.out.println("Binding result " + result);
 		
+		/**
+		 * If the validation fails then redirect the user to the same page or else show them the
+		 * confirmation page.
+		 *
+		 */
 		if (result.hasErrors()) {
 			return "customer-form";
 		} else {

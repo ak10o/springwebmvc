@@ -8,6 +8,8 @@ import javax.validation.constraints.Size;
 
 import org.hibernate.validator.constraints.NotBlank;
 
+import com.home.validation.CourseCode;
+
 public class Customer {
 
 	private String firstName;
@@ -20,6 +22,9 @@ public class Customer {
 	@Max(value = 10, message = "must be less than or equal to 10")
 	@NotNull(message = "is required")
 	private Integer freePasses;
+	
+	@CourseCode(value="INB", message = "must starts with INB")
+	private String courseCode;
 	
 	@Pattern(regexp = "^[0-9]{6}", message="only 6 digits allowed")
 	private String postalCode;
@@ -49,6 +54,12 @@ public class Customer {
 	}
 	public void setPostalCode(String postalCode) {
 		this.postalCode = postalCode;
+	}
+	public String getCourseCode() {
+		return courseCode;
+	}
+	public void setCourseCode(String courseCode) {
+		this.courseCode = courseCode;
 	}
 	
 }
